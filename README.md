@@ -15,5 +15,21 @@ PrintAll
 DeleteAll  
 PrintAll  
 
+## Installation
+
+Standard gradle way.
+
+### Prerequisites
+Needs to run on JRE 8 or higher.
+
+
+## Getting Started
+
+To run the application execute command:
+
+```
+gradlew run
+```
+
 
 //TODO finish the document
