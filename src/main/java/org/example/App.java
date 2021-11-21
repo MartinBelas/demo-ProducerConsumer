@@ -16,6 +16,7 @@ public class App {
     private static final Logger logger = LoggerFactory.getLogger(App.class);
 
     private static final int QUEUE_SIZE = 100;
+    private static final int THREADS_COUNT = 5;
 
     public static void main(String[] args) {
 
@@ -25,7 +26,7 @@ public class App {
         initializeCommands(commands);
 
         BlockingQueue<Command> queue = new LinkedBlockingDeque<>(QUEUE_SIZE);
-        ExecutorService executor = Executors.newFixedThreadPool(2);
+        ExecutorService executor = Executors.newFixedThreadPool(THREADS_COUNT);
 
         executor.execute(new Producer(queue, commands));
         executor.execute(new Consumer(queue));

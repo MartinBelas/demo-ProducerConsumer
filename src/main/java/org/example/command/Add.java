@@ -1,8 +1,11 @@
 package org.example.command;
 
 import org.example.domain.User;
+import org.example.repo.UserRepoProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Add implements Command {
 
@@ -17,8 +20,18 @@ public class Add implements Command {
     @Override
     public void execute() {
 
-        logger.info("execute Add userId: {}, userGuid: {}, userName: {}", user.getId(), user.getUuid(), user.getName());
+        logger.info("Execute Add userId: {}, userGuid: {}, userName: {} ...",
+                user.getId(), user.getUuid(), user.getName());
 
-        //TODO insert to db
+        UserRepoProvider.getRepo().add(user);
+
+        //TODO remove after the db implementation (for the purpose of example only)
+        try {
+            Thread.sleep(ThreadLocalRandom.current().nextInt(200,1500));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        logger.info("Command Add userId: {}, userGuid: {}, userName: {} executed.", user.getId(), user.getUuid(), user.getName());
     }
 }

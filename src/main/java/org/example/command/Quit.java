@@ -10,5 +10,6 @@ public class Quit implements Command {
     @Override
     public void execute() {
         logger.info("The Application finished correctly.");
+        System.exit(0);
     }
 }
