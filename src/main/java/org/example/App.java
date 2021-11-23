@@ -1,11 +1,10 @@
 package org.example;
 
 import org.example.command.*;
+import org.example.provider.CommandsListProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -22,24 +21,15 @@ public class App {
 
         logger.info("Start the Application");
 
-        List<Command> commands = new ArrayList<>();
-        initializeCommands(commands);
-
         BlockingQueue<Command> queue = new LinkedBlockingDeque<>(QUEUE_SIZE);
         ExecutorService executor = Executors.newFixedThreadPool(THREADS_COUNT);
 
-        executor.execute(new Producer(queue, commands));
-        executor.execute(new Consumer(queue));
+        CommandsProducer producer = new FromListProducer(queue, new CommandsListProvider().get());
+        CommandsConsumer consumer = new CommandsConsumer(queue);
+
+        executor.execute(producer);
+        executor.execute(consumer);
 
         executor.shutdown();
-    }
-
-    private static void initializeCommands(List<Command> commands) {
-        commands.add(new Add(1, "a1", "Robert"));
-        commands.add(new Add(2, "a2", "Martin"));
-        commands.add(new PrintAll());
-        commands.add(new DeleteAll());
-        commands.add(new PrintAll());
-        commands.add(new Quit());
     }
 }

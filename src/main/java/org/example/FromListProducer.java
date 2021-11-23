@@ -7,14 +7,17 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
 
-class Producer implements Runnable {
+/**
+ * The FromListProducer produces commands provided in a List of commands, {@link Command} and puts them to the provided BlockingQueue buffer.
+ */
+class FromListProducer implements CommandsProducer {
 
-    private static final Logger logger = LoggerFactory.getLogger(Producer.class);
+    private static final Logger logger = LoggerFactory.getLogger(FromListProducer.class);
 
     private final BlockingQueue<Command> queue;
     private final List<Command> commands;
 
-    public Producer(BlockingQueue<Command> queue, List<Command> commands) {
+    public FromListProducer(BlockingQueue<Command> queue, List<Command> commands) {
         this.queue = queue;
         this.commands = commands;
     }

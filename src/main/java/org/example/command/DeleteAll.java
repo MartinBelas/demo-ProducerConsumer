@@ -19,7 +19,7 @@ public class DeleteAll implements Command {
 
         //TODO remove after the db implementation (for the purpose of example only)
         try {
-            Thread.sleep(ThreadLocalRandom.current().nextInt(100,200));
+            Thread.sleep(ThreadLocalRandom.current().nextInt(100, 200));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

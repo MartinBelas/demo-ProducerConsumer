@@ -6,13 +6,16 @@ import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.BlockingQueue;
 
-class Consumer implements Runnable {
+/**
+ * This consumer consumes commands from provided BlockingQueue buffer and runs their {@link Command#execute()} method.
+ */
+class CommandsConsumer implements Runnable {
 
-    private static final Logger logger = LoggerFactory.getLogger(Consumer.class);
+    private static final Logger logger = LoggerFactory.getLogger(CommandsConsumer.class);
 
     private final BlockingQueue<Command> queue;
 
-    public Consumer(BlockingQueue<Command> queue) {
+    public CommandsConsumer(BlockingQueue<Command> queue) {
         this.queue = queue;
     }
 
