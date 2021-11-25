@@ -1,7 +1,7 @@
 package org.example.command;
 
 import org.example.domain.User;
-import org.example.repo.UserRepoProvider;
+import org.example.repository.UserRepositoryProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,7 +23,7 @@ public class Add implements Command {
         logger.info("Execute Add userId: {}, userGuid: {}, userName: {} ...",
                 user.getId(), user.getUuid(), user.getName());
 
-        UserRepoProvider.getRepo().add(user);
+        UserRepositoryProvider.getRepo().add(user);
 
         //TODO remove after the db implementation (for the purpose of example only)
         try {

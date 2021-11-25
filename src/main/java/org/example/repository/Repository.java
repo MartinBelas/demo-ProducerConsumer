@@ -1,8 +1,8 @@
-package org.example.repo;
+package org.example.repository;
 
 import java.util.stream.Stream;
 
-public interface Repo<T> {
+public interface Repository<T> {
 
     void add(T type);
 

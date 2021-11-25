@@ -1,4 +1,4 @@
-package org.example.repo;
+package org.example.repository;
 
 import org.example.domain.User;
 
@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
 
-public class UserRepo implements Repo<User>{
+public class UserRepository implements Repository<User> {
 
     private static Map<Integer, User> repo = new HashMap<>();
 

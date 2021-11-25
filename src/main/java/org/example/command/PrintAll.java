@@ -1,6 +1,6 @@
 package org.example.command;
 
-import org.example.repo.UserRepoProvider;
+import org.example.repository.UserRepositoryProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,7 +15,7 @@ public class PrintAll implements Command {
 
         logger.info("Execute PrintAll...");
 
-        UserRepoProvider.getRepo().getAll().forEach(System.out::println);
+        UserRepositoryProvider.getRepo().getAll().forEach(System.out::println);
 
         //TODO remove after the db implementation (for the purpose of example only)
         try {
