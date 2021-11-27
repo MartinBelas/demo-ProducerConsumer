@@ -1,12 +1,12 @@
 package org.example.repository;
 
-import java.util.stream.Stream;
+import java.util.List;
 
 public interface Repository<T> {
 
     void add(T type);
 
-    Stream<T> getAll();
+    List<T> getAll();
 
     void deleteAll();
 }

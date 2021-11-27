@@ -1,4 +1,4 @@
-package org.example.provider;
+package org.example.command.provider;
 
 import org.example.command.*;
 
@@ -11,8 +11,8 @@ import java.util.List;
  */
 public class CommandsListProvider {
 
-    private static List<Command> commands = new ArrayList<>();
-    {
+    private static final List<Command> commands = new ArrayList<>();
+    static {
         commands.add(new Add(1, "a1", "Robert"));
         commands.add(new Add(2, "a2", "Martin"));
         commands.add(new PrintAll());
@@ -20,6 +20,8 @@ public class CommandsListProvider {
         commands.add(new PrintAll());
         commands.add(new Quit());
     }
+
+    private CommandsListProvider() {}
 
     public static List<Command> get() {
         return commands;

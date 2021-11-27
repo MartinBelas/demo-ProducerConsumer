@@ -2,9 +2,9 @@ package org.example.domain;
 
 public class User {
 
-    int id;
-    String guid;
-    String name;
+    final int id;
+    final String guid;
+    final String name;
 
     public User(int userId, String userGuid, String userName) {
         this.id = userId;

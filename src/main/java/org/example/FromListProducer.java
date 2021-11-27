@@ -25,7 +25,7 @@ class FromListProducer implements CommandsProducer {
     @Override
     public void run() {
 
-        commands.stream().forEach(c -> {
+        commands.forEach(c -> {
             logger.info("Producing new command: {}", c.getClass().getSimpleName());
             try {
                 queue.put(c);

@@ -1,7 +1,7 @@
 package org.example;
 
 import org.example.command.*;
-import org.example.provider.CommandsListProvider;
+import org.example.command.provider.CommandsListProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,7 +24,7 @@ public class App {
         BlockingQueue<Command> queue = new LinkedBlockingDeque<>(QUEUE_SIZE);
         ExecutorService executor = Executors.newFixedThreadPool(THREADS_COUNT);
 
-        CommandsProducer producer = new FromListProducer(queue, new CommandsListProvider().get());
+        CommandsProducer producer = new FromListProducer(queue, CommandsListProvider.get());
         CommandsConsumer consumer = new CommandsConsumer(queue);
 
         executor.execute(producer);
