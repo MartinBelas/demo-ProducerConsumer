@@ -16,20 +16,23 @@ DeleteAll
 PrintAll  
 
 ## Installation
-
 Standard gradle way.
 
 ### Prerequisites
 Needs to run on JRE 8 or higher.
 
-
 ## Getting Started
-
 To run the application execute command:
-
 ```
 gradlew run
 ```
+This will run the application with the demonstration scenario with the sequence of the 5 commands.
 
+## Running the tests
+To run all tests execute command:
+```
+gradlew test
+```
 
-//TODO finish the document
+### FIFO integration test
+The FIFO integration test is in the file 'ProducerConsumerIntTest'
