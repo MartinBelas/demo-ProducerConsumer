@@ -1,6 +1,12 @@
 package org.example;
 
-import org.example.command.*;
+import org.example.command.Add;
+import org.example.command.Command;
+import org.example.command.DeleteAll;
+import org.example.command.PrintAll;
+import org.example.domain.User;
+import org.example.repository.Repository;
+import org.example.repository.RepositoryProvider;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class FromListProducerTest {
 
+    Repository<User> repo = RepositoryProvider.getUserRepository();
     CommandsProducer producer;
     BlockingQueue<Command> queue;
     List<Command> commands;
@@ -32,10 +39,10 @@ class FromListProducerTest {
 
     private List<Command> getCommands() {
         List<Command> commands = new ArrayList<>();
-        commands.add(new Add(1, "a1", "Robert"));
-        commands.add(new Add(2, "a2", "Martin"));
-        commands.add(new PrintAll());
-        commands.add(new DeleteAll());
+        commands.add(new Add(repo, new User(1, "a1", "Robert")));
+        commands.add(new Add(repo, new User(2, "a2", "Martin")));
+        commands.add(new PrintAll(repo));
+        commands.add(new DeleteAll(repo));
         return commands;
     }
 }

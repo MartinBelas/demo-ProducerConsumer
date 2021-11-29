@@ -7,7 +7,8 @@ import org.slf4j.LoggerFactory;
 import java.util.concurrent.BlockingQueue;
 
 /**
- * This consumer consumes commands from provided BlockingQueue buffer and runs their {@link Command#execute()} method.
+ * This consumer consumes commands from provided BlockingQueue buffer and runs
+ * their {@link Command#execute()} method.
  */
 class CommandsConsumer implements Runnable {
 

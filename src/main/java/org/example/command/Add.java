@@ -2,7 +2,6 @@ package org.example.command;
 
 import org.example.domain.User;
 import org.example.repository.Repository;
-import org.example.repository.RepositoryProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,9 +12,9 @@ public class Add implements Command {
     private final Repository<User> repo;
     private final User user;
 
-    public Add(int userId, String userGuid, String userName) {
-        this.repo = RepositoryProvider.getUserRepository();
-        this.user = new User(userId, userGuid, userName);
+    public Add(Repository<User> repo, User user) {
+        this.repo = repo;
+        this.user = user;
     }
 
     @Override

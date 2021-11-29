@@ -26,10 +26,6 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", guid='" + guid + '\'' +
-                ", name='" + name + '\'' +
-                '}';
+        return "User{" + "id=" + id + ", guid='" + guid + '\'' + ", name='" + name + '\'' + '}';
     }
 }

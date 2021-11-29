@@ -1,6 +1,8 @@
 package org.example.repository;
 
 import org.example.domain.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -8,24 +10,21 @@ import java.util.List;
 
 public class UserJdbcRepository implements Repository<User> {
 
-    //TODO from application.properties file
-    static final String DB_URL = "jdbc:h2://localhost/";
-    static final String USER = "demo";
-    static final String PASS = "demo123";
+    private static final Logger logger = LoggerFactory.getLogger(UserJdbcRepository.class);
 
     @Override
     public void add(User user) {
 
-        String query = "INSERT INTO SUSER (USER_ID, USER_GUID, USER_NAME) VALUES (?,?,?)";
+        String query = "INSERT INTO SUSERS (USER_ID, USER_GUID, USER_NAME) VALUES (?,?,?)";
 
-        try (Connection con = DriverManager.getConnection(DB_URL, USER, PASS);
-             PreparedStatement ps = con.prepareStatement(query)
-        ) {
+        try (Connection con = JdbcDataSource.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
+
             ps.setInt(1, user.getId());
             ps.setString(2, user.getUuid());
             ps.setString(3, user.getName());
             ps.executeUpdate();
         } catch (SQLException e) {
+            logger.error("Can't insert record to table.");
             e.printStackTrace();
         }
     }
@@ -33,20 +32,16 @@ public class UserJdbcRepository implements Repository<User> {
     @Override
     public List<User> getAll() {
 
-        String query = "SELECT * FROM SUSER";
+        String query = "SELECT * FROM SUSERS";
 
         List<User> result = new ArrayList<>();
 
-        try (Connection con = DriverManager.getConnection(DB_URL, USER, PASS);
-             PreparedStatement ps = con.prepareStatement(query);
-             ResultSet rs = ps.executeQuery()) {
+        try (Connection con = JdbcDataSource.getConnection();
+                PreparedStatement ps = con.prepareStatement(query);
+                ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
-                result.add(new User(
-                        rs.getInt("id"),
-                        rs.getString("uuid"),
-                        rs.getString("name")
-                ));
+                result.add(new User(rs.getInt("USER_ID"), rs.getString("USER_GUID"), rs.getString("USER_NAME")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -58,11 +53,9 @@ public class UserJdbcRepository implements Repository<User> {
     @Override
     public void deleteAll() {
 
-        String query = "Truncate table SUSER";
+        String query = "Truncate table SUSERS";
 
-        try (Connection con = DriverManager.getConnection(DB_URL, USER, PASS);
-             Statement stmt = con.createStatement()
-        ) {
+        try (Connection con = JdbcDataSource.getConnection(); Statement stmt = con.createStatement()) {
             stmt.execute(query);
         } catch (SQLException e) {
             e.printStackTrace();

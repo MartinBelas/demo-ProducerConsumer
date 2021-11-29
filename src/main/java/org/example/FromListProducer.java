@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.concurrent.BlockingQueue;
 
 /**
- * The FromListProducer produces commands provided in a List of commands, {@link Command} and puts them to the provided BlockingQueue buffer.
+ * The FromListProducer produces commands provided in a List of commands,
+ * {@link Command} and puts them to the provided BlockingQueue buffer.
  */
 class FromListProducer implements CommandsProducer {
 
